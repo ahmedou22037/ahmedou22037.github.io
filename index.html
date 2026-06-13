@@ -81,6 +81,7 @@
 
   /* ── HERO ── */
   #hero {
+    padding-right: 420px;
     position: relative;
     min-height: 100vh;
     display: flex;
@@ -236,17 +237,6 @@
     gap: 4rem;
     align-items: start;
   }
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-content img {
-        margin-bottom: 20px;
-    }
-}
-
   .about-text p { color: var(--slate); font-weight: 300; line-height: 1.9; margin-bottom: 1.2rem; }
   .about-stats {
     display: grid;
@@ -552,7 +542,33 @@
     .lang-card { border-right: none !important; border-bottom: 1px solid rgba(10,37,64,0.12); }
     .lang-card:last-child { border-bottom: none; }
   }
+   .hero-image {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
+.hero-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .hero-image {
+        position: static;
+        transform: none;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .hero-image img {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
