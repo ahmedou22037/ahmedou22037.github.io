@@ -1,621 +1,455 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ahmedou Mohamedou Limam Ahmed — Finance</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmedou Mohamedou Limam Ahmed — Finance & Data</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --paper:   #F4F7FA;
-    --paper-d: #E9EFF5;
-    --forest:  #0A2540;
-    --forest-l:#123A60;
-    --navy:    #0A2540;
-    --slate:   #5A6B7D;
-    --copper:  #2D7FF9;
-    --copper-l:#5FA2FF;
-    --accent2: #3B6E91;
-    --ink:     #1C2B3A;
-    --white:   #FFFFFF;
+    --navy:    #0a0f1e;
+    --navy2:   #0f1729;
+    --navy3:   #162040;
+    --gold:    #c9a84c;
+    --gold2:   #e8c96a;
+    --white:   #f4f4f0;
+    --muted:   #8899aa;
+    --border:  rgba(201,168,76,0.18);
+    --glass:   rgba(15,23,41,0.7);
   }
 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--navy);
+    color: var(--white);
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+    font-weight: 400;
+    line-height: 1.7;
     overflow-x: hidden;
   }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--navy3);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .ticker-inner span { margin: 0 32px; color: var(--muted); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* ── NAV ── */
   nav {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 33px;
+    left: 0; right: 0;
     z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.1rem 3rem;
-    background: rgba(244,247,250,0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(10,37,64,0.15);
-    transition: box-shadow 0.3s;
+    padding: 18px 6vw;
+    background: var(--glass);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: top 0.3s;
   }
-  nav.scrolled { box-shadow: 0 4px 24px rgba(10,37,64,0.08); }
   .nav-logo {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--forest);
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    text-decoration: none;
     letter-spacing: 0.02em;
   }
-  .nav-logo span { color: var(--copper); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--slate);
+    color: var(--muted);
     text-decoration: none;
-    transition: color 0.25s;
-    position: relative;
+    transition: color 0.2s;
   }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: -4px;
-    width: 0; height: 1px;
-    background: var(--copper);
-    transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--forest); }
-  .nav-links a:hover::after { width: 100%; }
+  .nav-links a:hover { color: var(--gold); }
 
   /* ── HERO ── */
-  #hero {
-    position: relative;
+  .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 7rem 3rem 4rem;
-    padding-right: 420px;
-    background:
-      linear-gradient(180deg, rgba(244,247,250,0) 0%, var(--paper) 100%),
-      repeating-linear-gradient(0deg, transparent 0, transparent 47px, rgba(10,37,64,0.05) 47px, rgba(10,37,64,0.05) 48px);
+    padding: 140px 6vw 80px;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.22em;
-    color: var(--copper);
-    text-transform: uppercase;
-    margin-bottom: 1.4rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.7s 0.2s forwards;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    width: 28px; height: 1px;
-    background: var(--copper);
-    display: inline-block;
-  }
-  .hero-name {
-    font-family: 'Source Serif 4', serif;
-    font-size: clamp(2.8rem, 6.5vw, 5.8rem);
-    font-weight: 600;
-    line-height: 1.08;
-    color: var(--forest);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 0.8s 0.4s forwards;
-    letter-spacing: -0.01em;
-  }
-  .hero-name em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--copper);
-  }
-  .hero-sub {
-    margin-top: 1.6rem;
-    max-width: 560px;
-    font-size: 1.05rem;
-    color: var(--slate);
-    font-weight: 300;
-    line-height: 1.8;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s 0.65s forwards;
-  }
-  .hero-cta {
-    margin-top: 2.4rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s 0.85s forwards;
-  }
-  .btn-primary {
-    padding: 0.75rem 2rem;
-    background: var(--forest);
-    color: var(--paper);
-    border: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.25s, transform 0.2s;
-  }
-  .btn-primary:hover { background: var(--forest-l); transform: translateY(-2px); }
-  .btn-outline {
-    padding: 0.75rem 2rem;
-    background: transparent;
-    color: var(--forest);
-    border: 1px solid rgba(10,37,64,0.3);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: border-color 0.25s, color 0.25s, transform 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--copper); color: var(--copper); transform: translateY(-2px); }
-
-  /* ── HERO IMAGE ── */
-  .hero-image {
+  .hero-grid {
     position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
-    animation: fadeUp 0.9s 0.6s forwards;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
   }
-  .hero-image img {
-    width: 340px;
-    height: 420px;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    border-radius: 4px;
-    box-shadow: 0 20px 60px rgba(10,37,64,0.18), 0 4px 16px rgba(10,37,64,0.1);
-  }
-
-  .scroll-hint {
+  .hero-glow {
     position: absolute;
-    bottom: 2.5rem;
-    left: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    color: var(--slate);
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 1s 1.3s forwards;
-  }
-  .scroll-hint .line {
-    width: 40px; height: 1px;
-    background: var(--copper);
-    animation: lineGrow 1.2s 1.5s both;
-  }
-  @keyframes lineGrow { from { width: 0; } to { width: 40px; } }
-
-  /* ── SECTIONS ── */
-  section { position: relative; z-index: 1; }
-  .section-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 6rem 3rem;
-  }
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--copper);
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-  .section-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 600;
-    color: var(--forest);
-    margin-bottom: 3rem;
-    line-height: 1.15;
-  }
-  .divider {
-    width: 48px; height: 2px;
-    background: var(--copper);
-    margin-bottom: 2rem;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
   }
 
-  /* ── ABOUT ── */
-  #about { background: var(--white); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  .about-text p { color: var(--slate); font-weight: 300; line-height: 1.9; margin-bottom: 1.2rem; }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid rgba(10,37,64,0.12);
-  }
-  .stat-card {
-    padding: 1.8rem 1.6rem;
-    border-right: 1px solid rgba(10,37,64,0.12);
-    border-bottom: 1px solid rgba(10,37,64,0.12);
-    transition: background 0.25s;
-  }
-  .stat-card:nth-child(2n) { border-right: none; }
-  .stat-card:nth-last-child(-n+2) { border-bottom: none; }
-  .stat-card:hover { background: var(--paper); }
-  .stat-num {
-    font-family: 'Source Serif 4', serif;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: var(--forest);
-    line-height: 1;
-    font-feature-settings: "tnum";
-  }
-  .stat-lbl {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    color: var(--slate);
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-  }
-
-  /* ── EXPERIENCE ── */
-  #experience { background: var(--paper); }
-  .timeline { position: relative; }
-  .tl-item {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 2rem;
-    padding: 1.8rem 0;
-    border-top: 1px solid rgba(10,37,64,0.15);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .tl-item:last-child { border-bottom: 1px solid rgba(10,37,64,0.15); }
-  .tl-item.visible { opacity: 1; transform: none; }
-  .tl-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--copper);
-    letter-spacing: 0.06em;
-    padding-top: 0.2rem;
-  }
-  .tl-role {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--forest);
-    margin-bottom: 0.2rem;
-  }
-  .tl-org {
-    font-size: 0.8rem;
-    color: var(--ink);
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    margin-bottom: 0.7rem;
-  }
-  .tl-desc {
-    font-size: 0.92rem;
-    color: var(--slate);
-    font-weight: 300;
-    line-height: 1.7;
-    max-width: 600px;
-  }
-  /* Experience image — sits below the description, full width of content col */
-  .tl-img {
-    margin-top: 1.2rem;
-    max-width: 420px;
-  }
-  .tl-img img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    border-radius: 4px;
-    border-left: 3px solid var(--copper);
-    box-shadow: 0 8px 24px rgba(10,37,64,0.12);
-  }
-
-  /* ── SKILLS ── */
-  #skills { background: var(--white); }
-  #skills .section-title { color: var(--ink); }
-  #skills .divider { background: var(--copper-l); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1px;
-    background: white;
-    border: 1px solid rgba(10,37,64,0.08);
-  }
-  .skill-card {
-    background: var(--navy);
-    padding: 1.8rem 1.8rem;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s, transform 0.5s, background 0.25s;
-  }
-  .skill-card.visible { opacity: 1; transform: none; }
-  .skill-card:hover { background: var(--accent2); }
-  .skill-index {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--copper-l);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.8rem;
-  }
-  .skill-name {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--paper);
-    margin-bottom: 0.4rem;
-  }
-  .skill-desc { font-size: 0.82rem; color: rgba(244,247,250,0.5); line-height: 1.6; font-weight: 300; }
-
-  /* ── PROJECTS ── */
-  #projects { background: var(--white); }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid rgba(10,37,64,0.12);
-  }
-  .proj-card {
-    background: var(--white);
-    padding: 2.2rem;
-    border-right: 1px solid rgba(10,37,64,0.12);
-    border-bottom: 1px solid rgba(10,37,64,0.12);
-    transition: background 0.25s;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .proj-card.visible { opacity: 1; transform: none; transition: opacity 0.6s, transform 0.6s, background 0.25s; }
-  .proj-card:nth-child(2n) { border-right: none; }
-  .proj-card:nth-last-child(-n+2):not(:nth-last-child(2n+1)) { border-bottom: none; }
-  .proj-card:hover { background: var(--paper); }
-  .proj-type {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--copper);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 0.7rem;
-  }
-  .proj-title {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--forest);
-    margin-bottom: 0.8rem;
-    line-height: 1.25;
-  }
-  .proj-desc { font-size: 0.88rem; color: var(--slate); font-weight: 300; line-height: 1.7; }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
-  .tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.06em;
-    color: var(--forest);
-    border: 1px solid rgba(10,37,64,0.25);
-    padding: 0.25rem 0.65rem;
-    text-transform: uppercase;
-  }
-  #projects .projects-grid .proj-card:nth-last-child(1),
-  #projects .projects-grid .proj-card:nth-last-child(2) {
-    border-bottom: none;
-  }
-
-  /* ── EDUCATION ── */
-  #education { background: var(--paper); }
-  .edu-list { display: flex; flex-direction: column; }
-  .edu-item {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 2rem;
-    padding: 1.6rem 0;
-    border-top: 1px solid rgba(10,37,64,0.15);
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .edu-item:last-child { border-bottom: 1px solid rgba(10,37,64,0.15); }
-  .edu-item.visible { opacity: 1; transform: none; }
-  .edu-year {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--copper);
-    letter-spacing: 0.06em;
-    padding-top: 0.2rem;
-  }
-  .edu-degree {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--forest);
-    margin-bottom: 0.2rem;
-  }
-  .edu-school { font-size: 0.85rem; color: var(--slate); }
-
-  /* ── LANGUAGES & TOOLS ── */
-  #languages { background: var(--white); }
-
-  .lang-tools-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  .lang-block-title, .tools-block-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--copper);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-  .lang-block-title::after, .tools-block-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(10,37,64,0.12);
-  }
-
-  .lang-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  .lang-item {
+  /* ── HERO LAYOUT: text left, photo right ── */
+  .hero-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.2rem;
-    background: var(--paper);
-    border-left: 3px solid var(--copper);
-    transition: background 0.2s, transform 0.2s;
+    gap: 48px;
+    position: relative;
+    z-index: 1;
   }
-  .lang-item:hover { background: var(--paper-d); transform: translateX(4px); }
-  .lang-item-name {
-    font-family: 'Source Serif 4', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--forest);
-  }
-  .lang-item-level {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--copper);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: rgba(45,127,249,0.08);
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(45,127,249,0.2);
-  }
+  .hero-content { flex: 1; min-width: 0; }
 
-  .tools-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+  /* ── HERO PHOTO ── */
+  .hero-photo-wrap {
+    flex-shrink: 0;
+    width: 280px;
+    height: 340px;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
   }
-  .tool-item {
+  /* Gold border frame */
+  .hero-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 1px solid var(--gold);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Offset accent square */
+  .hero-photo-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    right: -14px;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--gold);
+    opacity: 0.25;
+    z-index: 0;
+  }
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    position: relative;
+    z-index: 1;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  /* Placeholder shown when no image is set */
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--navy3);
+    border: 2px dashed var(--border);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.75rem 1rem;
-    background: var(--paper);
-    border: 1px solid rgba(10,37,64,0.08);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--forest);
-    font-weight: 500;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
     cursor: default;
   }
-  .tool-item::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--copper);
-    border-radius: 50%;
-    flex-shrink: 0;
+  .hero-photo-placeholder .ph-icon { font-size: 36px; opacity: 0.4; }
+  .hero-photo-placeholder .ph-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 0 16px;
+    line-height: 1.6;
   }
-  .tool-item:hover { background: var(--forest); color: var(--paper); border-color: var(--forest); }
-  .tool-item:hover::before { background: var(--copper-l); }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6vw, 86px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .btn {
+    padding: 14px 32px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+  }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+    flex-wrap: wrap;
+  }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 6vw; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 48px;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy2); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-text p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-bottom: 20px; }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .info-row .label { color: var(--muted); letter-spacing: 0.05em; }
+  .info-row .value { color: var(--white); font-weight: 500; }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--navy); }
+  .edu-list { display: flex; flex-direction: column; }
+
+  .edu-item {
+    display: grid;
+    grid-template-columns: 160px auto 1fr;
+    gap: 32px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .edu-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    line-height: 1.6;
+    align-self: start;
+    padding-top: 4px;
+  }
+
+  /* ── EDUCATION PHOTO ── */
+  .edu-photo-wrap {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    position: relative;
+    align-self: center;
+  }
+  .edu-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 1px solid var(--gold);
+    opacity: 0.3;
+  }
+  .edu-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: grayscale(30%);
+  }
+  .edu-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--navy3);
+    border: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .edu-photo-placeholder .ph-icon { font-size: 20px; opacity: 0.4; }
+  .edu-photo-placeholder .ph-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .edu-info { min-width: 0; }
+  .edu-degree { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 4px; }
+  .edu-school { font-size: 13px; color: var(--muted); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px; }
+  .skill-card {
+    background: var(--navy3);
+    padding: 32px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .skill-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .skill-card:hover::before { opacity: 1; }
+  .skill-icon { font-size: 24px; margin-bottom: 16px; }
+  .skill-title { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); margin-bottom: 12px; }
+  .skill-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--navy); }
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-item { display: grid; grid-template-columns: 160px 1fr; gap: 32px; padding: 36px 0; border-bottom: 1px solid var(--border); }
+  .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); padding-top: 4px; line-height: 1.6; }
+  .exp-role { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); margin-bottom: 4px; }
+  .exp-company { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--navy2); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; }
+  .project-card { background: var(--navy3); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.2s; }
+  .project-card:hover { border-color: var(--gold); }
+  .project-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block; }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--white); line-height: 1.2; margin-bottom: 16px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tech-pill { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 5px 12px; border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.05em; border-radius: 1px; }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--navy); }
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2px; }
+  .research-item { padding: 28px; border: 1px solid var(--border); transition: border-color 0.2s; }
+  .research-item:hover { border-color: var(--gold); }
+  .research-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); margin-bottom: 12px; opacity: 0.6; }
+  .research-topic { font-size: 14px; color: var(--white); line-height: 1.5; font-weight: 500; }
 
   /* ── CONTACT ── */
-  #contact { background: var(--forest); }
-  #contact .section-title { color: var(--paper); }
-  #contact .section-label { color: var(--copper-l); }
-  #contact .divider { background: var(--copper-l); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-intro { font-size: 1rem; color: rgba(244,247,250,0.65); font-weight: 300; line-height: 1.9; }
-  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--paper);
-    font-size: 0.88rem;
-    padding: 1rem 1.3rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: background 0.25s, border-color 0.25s;
-  }
-  .contact-link:hover { background: rgba(45,127,249,0.12); border-color: rgba(45,127,249,0.4); }
-  .contact-link .icon { font-size: 1.1rem; }
-  .contact-link .lbl {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem;
-    color: var(--copper-l);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    display: block;
-    margin-bottom: 0.15rem;
-  }
+  #contact { background: var(--navy2); text-align: center; }
+  #contact .section-title { margin-bottom: 16px; }
+  .contact-sub { color: var(--muted); font-size: 15px; margin-bottom: 48px; max-width: 440px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-item { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; font-size: 13px; transition: all 0.2s; font-family: 'JetBrains Mono', monospace; }
+  .contact-item:hover { border-color: var(--gold); color: var(--gold); }
 
   /* ── FOOTER ── */
-  footer {
-    background: #061a2e;
-    color: rgba(244,247,250,0.35);
-    text-align: center;
-    padding: 2rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    letter-spacing: 0.06em;
-  }
+  footer { text-align: center; padding: 32px 6vw; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 720px) {
-    nav { padding: 1rem 1.5rem; }
+  @media (max-width: 900px) {
+    .hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 40px; }
+    .hero-photo-wrap { width: 200px; height: 240px; align-self: center; }
+    .hero h1 { font-size: clamp(38px, 10vw, 64px); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 5vw; }
     .nav-links { display: none; }
-    #hero { padding: 6rem 1.5rem 3rem; }
-    .section-inner { padding: 4rem 1.5rem; }
-    .about-grid, .contact-grid, .lang-tools-grid { grid-template-columns: 1fr; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-    .projects-grid, .skills-grid { grid-template-columns: 1fr; }
-    .tl-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .proj-card { border-right: none !important; }
-    .hero-image { position: static; transform: none; margin-top: 2rem; animation: none; opacity: 1; }
-    .hero-image img { width: 100%; height: 260px; }
-    .tools-list { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .edu-item { grid-template-columns: 1fr; gap: 16px; }
+    .edu-photo-wrap { width: 56px; height: 56px; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .hero-stats { gap: 28px; }
+    .hero-photo-wrap { width: 160px; height: 200px; align-self: center; }
+    section { padding: 72px 5vw; }
+    .hero { padding: 120px 5vw 64px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-photo-wrap { width: 140px; height: 175px; }
+    .hero h1 { font-size: 36px; }
+    .contact-links { flex-direction: column; align-items: center; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -625,168 +459,228 @@
 </head>
 <body>
 
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    CREDIT RISK MODELING &nbsp;<span>◆</span>&nbsp; MACHINE LEARNING IN FINANCE &nbsp;<span>◆</span>&nbsp; BANKING SYSTEMS &nbsp;<span>◆</span>&nbsp; PROBABILITY OF DEFAULT &nbsp;<span>◆</span>&nbsp; XGBoost · RANDOM FOREST · LOGISTIC REGRESSION &nbsp;<span>◆</span>&nbsp; FINANCIAL ANALYSIS &nbsp;<span>◆</span>&nbsp; ECL FRAMEWORK &nbsp;<span>◆</span>&nbsp; IFRS 9 &nbsp;<span>◆</span>&nbsp;
+    CREDIT RISK MODELING &nbsp;<span>◆</span>&nbsp; MACHINE LEARNING IN FINANCE &nbsp;<span>◆</span>&nbsp; BANKING SYSTEMS &nbsp;<span>◆</span>&nbsp; PROBABILITY OF DEFAULT &nbsp;<span>◆</span>&nbsp; XGBoost · RANDOM FOREST · LOGISTIC REGRESSION &nbsp;<span>◆</span>&nbsp; FINANCIAL ANALYSIS &nbsp;<span>◆</span>&nbsp; ECL FRAMEWORK &nbsp;<span>◆</span>&nbsp; IFRS 9 &nbsp;<span>◆</span>&nbsp;
+  </div>
+</div>
+
 <!-- NAV -->
-<nav id="navbar">
-  <div class="nav-logo">A<span>.</span>Limam</div>
+<nav id="nav">
+  <a href="#hero" class="nav-logo">A.M.L.A</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
-  <p class="hero-eyebrow">Finance · Analytics</p>
-  <h1 class="hero-name">
-    Ahmedou<br>Mohamedou<br>Ahmed
-  </h1>
-  <p class="hero-sub">
-    Bachelor of Business Science graduate, specializing in Finance.
-  </p>
-  <div class="hero-cta">
-    <a href="#experience" class="btn-primary">View Experience</a>
-    <a href="#contact" class="btn-outline">Get in Touch</a>
-  </div>
-  <div class="hero-image">
-    <img src="WhatsApp_Image_2026-04-12_at_19.38.26-removebg-preview.jpg" alt="Ahmedou Ahmed">
-  </div>
-  <div class="scroll-hint">
-    <div class="line"></div>
-    Scroll to explore
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+
+    <!-- LEFT: Text -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">Finance · Data · Risk</div>
+      <h1>Ahmedou<br><em>Mohamedou</em><br>Limam Ahmed</h1>
+      <p class="hero-sub">Finance graduate bridging quantitative methods and real-world banking — building tools that make credit risk legible.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-gold">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">2</div><div class="stat-label">ML Prototypes Built</div></div>
+        <div><div class="stat-num">3</div><div class="stat-label">Banking Internships</div></div>
+        <div><div class="stat-num">5</div><div class="stat-label">ML Models Evaluated</div></div>
+        <div><div class="stat-num">3</div><div class="stat-label">Languages</div></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Profile Photo -->
+    <!-- ╔══════════════════════════════════════════════════════╗
+         ║  TO ADD YOUR PHOTO:                                  ║
+         ║  1. Put your photo file in the same folder as        ║
+         ║     this HTML file (e.g. photo.jpg)                  ║
+         ║  2. Replace the placeholder div below with:          ║
+         ║     <img src="photo.jpg" class="hero-photo"          ║
+         ║          alt="Ahmedou Mohamedou Limam Ahmed">         ║
+         ╚══════════════════════════════════════════════════════╝ -->
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-placeholder">
+        <span class="ph-icon">🖼</span>
+        <span class="ph-text">Your photo<br>here<br><br>Replace with<br>&lt;<img src="WhatsApp_Image_2026-04-12_at_19.38.26-removebg-preview.jpg" class="hero-photo"    
+                 alt="Ahmedou Mohamedou Limam Ahmed"><br>class="hero-photo"&gt;</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-inner">
-    <p class="section-label">About me</p>
-    <div class="divider"></div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>I'm a Finance student at Nouakchott Business School, with a strong foundation in financial systems, banking operations, and quantitative analysis. My academic path began with a Mathematics Baccalaureate — a discipline that continues to shape how I approach complex financial problems.</p>
-        <p>Through internships at Mauritania's most prominent financial institutions — the Investment Bank and the Central Bank — I've gained direct exposure to commercial banking and monetary policy supervision at a national level.</p>
-        <p>I'm equally comfortable modeling risk in Excel, scripting data pipelines in Python, or researching Islamic finance alternatives. I seek roles where precision meets purpose.</p>
+  <div class="section-eyebrow">01 — About</div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h2 class="section-title">Finance mind.<br>Data instinct.</h2>
+      <p>I am a Finance graduate from Nouakchott Business School with a strong focus on <strong>credit risk modelling, banking systems, and data-driven financial analysis</strong>. My academic path began in mathematics and engineering preparatory classes before pivoting fully into finance — a background that shapes how I approach problems.</p>
+      <p>Over the past year, I have completed internships at both the <strong>Mauritania Investment Bank</strong> and the <strong>Central Bank of Mauritania</strong>, gaining direct exposure to commercial banking operations and monetary policy oversight. I have also developed two machine learning prototypes for credit scoring.</p>
+      <p>I am interested in the intersection of <strong>quantitative finance and emerging markets</strong> — particularly how modern credit risk frameworks like IFRS 9 and ECL can be applied in banking sectors that are still evolving.</p>
+    </div>
+    <div class="about-aside reveal">
+      <div class="info-row"><span class="label">Location</span><span class="value">Nouakchott, Mauritania</span></div>
+      <div class="info-row"><span class="label">Degree</span><span class="value">BBS — Finance Major</span></div>
+      <div class="info-row"><span class="label">Email</span><span class="value">22001@nbs.mr</span></div>
+      <div class="info-row"><span class="label">Phone</span><span class="value">+222 27779354</span></div>
+      <div class="info-row"><span class="label">Languages</span><span class="value">Arabic · English · French</span></div>
+      <div class="info-row"><span class="label">Available for</span><span class="value">Internships · Entry-level Roles</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">02 — Education</div>
+  <h2 class="section-title">Academic<br>Background</h2>
+  <div class="edu-list">
+
+    <!-- NBS -->
+    <!-- ╔══════════════════════════════════════════════════╗
+         ║  TO ADD NBS LOGO/PHOTO:                          ║
+         ║  Replace the placeholder div with:              ║
+         ║  <img src="nbs-logo.jpg" class="edu-photo"      ║
+         ║       alt="NBS">                                 ║
+         ╚══════════════════════════════════════════════════╝ -->
+    <div class="edu-item reveal">
+      <div class="edu-year">2024 — 2026</div>
+      <div class="edu-photo-wrap">
+        <div class="edu-photo-placeholder">
+          <span class="ph-icon">🎓</span>
+          <span class="ph-text">NBS<br>logo</span>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-lbl">Internships completed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">2</div>
-          <div class="stat-lbl">ML credit models built</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-lbl">Languages spoken</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">4+</div>
-          <div class="stat-lbl">Research papers</div>
+      <div class="edu-info">
+        <div class="edu-degree">Bachelor of Business Science</div>
+        <div class="edu-school">Nouakchott Business School (NBS) — Major in Finance</div>
+      </div>
+    </div>
+
+    <!-- IPGEI -->
+    <!-- ╔══════════════════════════════════════════════════╗
+         ║  TO ADD IPGEI LOGO/PHOTO:                        ║
+         ║  Replace the placeholder div with:              ║
+         ║  <img src="ipgei-logo.jpg" class="edu-photo"    ║
+         ║       alt="IPGEI">                               ║
+         ╚══════════════════════════════════════════════════╝ -->
+    <div class="edu-item reveal">
+      <div class="edu-year">2022 — 2024</div>
+      <div class="edu-photo-wrap">
+        <div class="edu-photo-placeholder">
+          <span class="ph-icon">🎓</span>
+          <span class="ph-text">IPGEI<br>logo</span>
         </div>
       </div>
+      <div class="edu-info">
+        <div class="edu-degree">Preparatory Commercial Classes ECG</div>
+        <div class="edu-school">IPGEI — Institut Préparatoire aux Grandes Écoles d'Ingénieurs</div>
+      </div>
+    </div>
+
+    <!-- BAC -->
+    <!-- ╔══════════════════════════════════════════════════╗
+         ║  TO ADD BAC PHOTO:                               ║
+         ║  Replace the placeholder div with:              ║
+         ║  <img src="bac-photo.jpg" class="edu-photo"     ║
+         ║       alt="Baccalaureate">                       ║
+         ╚══════════════════════════════════════════════════╝ -->
+    <div class="edu-item reveal">
+      <div class="edu-year">2022</div>
+      <div class="edu-photo-wrap">
+        <div class="edu-photo-placeholder">
+          <span class="ph-icon">🎓</span>
+          <span class="ph-text">School<br>logo</span>
+        </div>
+      </div>
+      <div class="edu-info">
+        <div class="edu-degree">Baccalaureate</div>
+        <div class="edu-school">Mathematics Major</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">03 — Skills</div>
+  <h2 class="section-title">What I<br>Work With</h2>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">📊</div>
+      <div class="skill-title">Financial Analysis</div>
+      <div class="skill-desc">Financial statement analysis using ratio-based evaluation. Business valuation via DCF, asset-based, and relative methods. Market structure and price action analysis.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-title">Machine Learning</div>
+      <div class="skill-desc">Supervised ML algorithms for credit scoring: Logistic Regression, Decision Tree, Random Forest, Gradient Boosting, XGBoost. Model evaluation and comparison.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🏦</div>
+      <div class="skill-title">Banking & Credit Risk</div>
+      <div class="skill-desc">Banking operations, credit assessment, fundamental risk analysis, ECL framework, and understanding of IFRS 9 applied to the banking sector.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">📈</div>
+      <div class="skill-title">Financial Modelling</div>
+      <div class="skill-desc">Excel-based financial modelling and forecasting, scenario analysis, portfolio management under Modern Portfolio Theory.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🐍</div>
+      <div class="skill-title">Python & Data</div>
+      <div class="skill-desc">Python for data analysis and ML model development. Power BI for financial dashboards. Excel for advanced modelling and scenario planning.</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-title">FinTech & Innovation</div>
+      <div class="skill-desc">Understanding of digital financial systems, FinTech-driven innovation, and alternative data approaches to credit scoring for unbanked populations.</div>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-inner">
-    <h2 class="section-title">Experience</h2>
-    <div class="divider"></div>
-    <div class="timeline">
-
-      <div class="tl-item">
-        <div class="tl-date">FEB – APR 2026</div>
-        <div class="tl-content">
-          <div class="tl-role">Program Intern</div>
-          <div class="tl-org">Aspire Leaders Program (ALP) — Online</div>
-          <div class="tl-desc">Participated in a competitive leadership development program focused on professional skills, cross-cultural collaboration, and career strategy for high-potential emerging leaders.</div>
-        </div>
+  <div class="section-eyebrow">04 — Experience</div>
+  <h2 class="section-title">Where I've<br>Worked</h2>
+  <div class="exp-list">
+    <div class="exp-item reveal">
+      <div class="exp-date">Feb — Apr 2026</div>
+      <div>
+        <div class="exp-role">Online Internship</div>
+        <div class="exp-company">Aspire Leaders Program (ALP)</div>
+        <div class="exp-desc">Strengthened leadership and communication skills through a structured professional development program designed to equip emerging professionals with practical tools to lead effectively in global contexts.</div>
       </div>
-
-      <div class="tl-item">
-        <div class="tl-date">DEC 2025</div>
-        <div class="tl-content">
-          <div class="tl-role">Intern — Banking Supervision</div>
-          <div class="tl-org">Central Bank of Mauritania (BCM)</div>
-          <div class="tl-desc">Gained insight into the central bank's supervisory framework and its mechanisms for maintaining financial stability — including oversight processes and regulatory compliance procedures applied to Mauritanian commercial banks.</div>
-          <div class="tl-img">
-            <img src="central bank.jpg" alt="Central Bank of Mauritania">
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-date">SEP 2025</div>
-        <div class="tl-content">
-          <div class="tl-role">Intern — Commercial Banking</div>
-          <div class="tl-org">Mauritania Investment Bank (BMI)</div>
-          <div class="tl-desc">Acquired hands-on knowledge of local and international banking operations, commercial lending, and transaction processing within Mauritania's primary investment bank.</div>
-          <div class="tl-img">
-            <img src="882-1024x414.jpg" alt="Mauritania Investment Bank">
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-inner">
-    <h2 class="section-title">Financial & Technical Skills</h2>
-    <div class="divider"></div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-index">01</div>
-        <div class="skill-name">Financial Market Analysis</div>
-        <div class="skill-desc">Market structure, price action, and macro/financial indicators.</div>
+    <div class="exp-item reveal">
+      <div class="exp-date">December 2025</div>
+      <div>
+        <div class="exp-role">Internship</div>
+        <div class="exp-company">Central Bank of Mauritania (BCM)</div>
+        <div class="exp-desc">Gained insight into the central bank's banking supervision framework and its role in maintaining financial stability. Developed a practical understanding of monetary policy oversight and regulatory mechanisms governing the Mauritanian banking sector.</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-index">02</div>
-        <div class="skill-name">Financial Statement Analysis</div>
-        <div class="skill-desc">Ratio-based evaluation of company financial statements.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">03</div>
-        <div class="skill-name">Business Valuation</div>
-        <div class="skill-desc">DCF, asset-based, and relative valuation methods.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">04</div>
-        <div class="skill-name">Financial Modelling</div>
-        <div class="skill-desc">Excel-based forecasting and scenario analysis.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">05</div>
-        <div class="skill-name">Credit & Risk Assessment</div>
-        <div class="skill-desc">Banking operations, credit evaluation, and fundamental risk analysis.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">06</div>
-        <div class="skill-name">Islamic Finance</div>
-        <div class="skill-desc">Principles and alternatives to conventional derivatives.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">07</div>
-        <div class="skill-name">FinTech & Digital Finance</div>
-        <div class="skill-desc">Understanding of digital financial systems and innovation.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">08</div>
-        <div class="skill-name">Portfolio Management</div>
-        <div class="skill-desc">Modern Portfolio Theory and asset allocation strategies.</div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-index">09</div>
-        <div class="skill-name">Taxation</div>
-        <div class="skill-desc">VAT and corporate taxation principles in the Mauritanian context.</div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">September 2025</div>
+      <div>
+        <div class="exp-role">Internship</div>
+        <div class="exp-company">Mauritania Investment Bank (BMI)</div>
+        <div class="exp-desc">Gained solid knowledge of local and international banking operations and commercial banking transactions. Exposed to day-to-day credit operations and client-facing banking services within a commercial banking environment.</div>
       </div>
     </div>
   </div>
@@ -794,183 +688,93 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-inner">
-    <h2 class="section-title">Research & Projects</h2>
-    <div class="divider"></div>
-    <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-type">ML Project</div>
-        <div class="proj-title">Credit Scoring — Default Risk Model</div>
-        <div class="proj-desc">Developed a machine learning prototype to predict borrower default risk, enabling data-driven credit decisions for financial institutions.</div>
+  <div class="section-eyebrow">05 — Projects</div>
+  <h2 class="section-title">Things I've<br>Built</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <span class="project-tag">Credit Risk · ML</span>
+      <div class="project-title">ML Credit Scoring Prototype</div>
+      <div class="project-desc">Developed a machine learning-based credit scoring tool to predict borrower default risk using the German Credit Dataset. Implemented and compared five supervised algorithms — Logistic Regression, Decision Tree, Random Forest, Gradient Boosting, and XGBoost — with a live Gradio interface for real-time predictions.</div>
+      <div class="project-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">XGBoost</span>
+        <span class="tech-pill">Scikit-learn</span>
+        <span class="tech-pill">Gradio</span>
+        <span class="tech-pill">Pandas</span>
       </div>
-      <div class="proj-card">
-        <div class="proj-type">ML Project</div>
-        <div class="proj-title">Alternative-Data Credit Scoring</div>
-        <div class="proj-desc">Built a credit scoring prototype leveraging alternative data to assess the creditworthiness of unbanked and informal-sector individuals — closing the financial inclusion gap.</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-type">Research</div>
-        <div class="proj-title">Derivative Markets</div>
-        <div class="proj-desc">In-depth study of options, futures, forwards, and swaps — market mechanics, pricing frameworks, and hedging applications.</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-type">Research</div>
-        <div class="proj-title">Monetary Policy & Economic Impact</div>
-        <div class="proj-desc">Analysis of central bank tools — interest rate policy, open market operations — and their macroeconomic transmission effects.</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-type">Research</div>
-        <div class="proj-title">Corporate Leasing under IFRS 16</div>
-        <div class="proj-desc">Study of accounting treatment for leases following IFRS 16 adoption, including right-of-use assets and liability recognition.</div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-type">Research</div>
-        <div class="proj-title">Islamic Finance Alternatives</div>
-        <div class="proj-desc">Investigation of Shariah-compliant instruments as alternatives to conventional derivatives, with a focus on Mauritanian and Gulf markets.</div>
+    </div>
+    <div class="project-card reveal">
+      <span class="project-tag">FinTech · Alternative Data</span>
+      <div class="project-title">Alternative Data Credit Scoring</div>
+      <div class="project-desc">Developed a credit scoring prototype using alternative data sources to assess the creditworthiness of unbanked and informal-sector individuals — addressing a critical gap in traditional credit assessment methods that exclude large segments of emerging market populations.</div>
+      <div class="project-tech">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Alternative Data</span>
+        <span class="tech-pill">FinTech</span>
+        <span class="tech-pill">ML</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-inner">
-    <h2 class="section-title">Education</h2>
-    <div class="divider"></div>
-    <div class="edu-list">
-      <div class="edu-item">
-        <div class="edu-year">2024 – 2026</div>
-        <div>
-          <div class="edu-degree">Bachelor of Business Science — Finance</div>
-          <div class="edu-school">Nouakchott Business School (NBS)</div>
-        </div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-year">2022 – 2024</div>
-        <div>
-          <div class="edu-degree">Preparatory Commercial Classes (ECG)</div>
-          <div class="edu-school">IPGEI — Institut Préparatoire aux Grandes Écoles d'Ingénieurs</div>
-        </div>
-      </div>
-      <div class="edu-item">
-        <div class="edu-year">2022</div>
-        <div>
-          <div class="edu-degree">Baccalaureate — Mathematics</div>
-          <div class="edu-school">Mauritania</div>
-        </div>
-      </div>
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-eyebrow">06 — Research</div>
+  <h2 class="section-title">Topics I've<br>Studied</h2>
+  <div class="research-grid">
+    <div class="research-item reveal">
+      <div class="research-num">R-01</div>
+      <div class="research-topic">Derivative Markets — Options, Futures, Forwards & Swaps</div>
     </div>
-  </div>
-</section>
-
-<!-- LANGUAGES & TOOLS -->
-<section id="languages">
-  <div class="section-inner">
-    <h2 class="section-title">Languages & Tools</h2>
-    <div class="divider"></div>
-    <div class="lang-tools-grid">
-
-      <div>
-        <p class="lang-block-title">Languages</p>
-        <div class="lang-list">
-          <div class="lang-item">
-            <span class="lang-item-name">Arabic</span>
-            <span class="lang-item-level">Native</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-item-name">English</span>
-            <span class="lang-item-level">B2+</span>
-          </div>
-          <div class="lang-item">
-            <span class="lang-item-name">French</span>
-            <span class="lang-item-level">DELF B2</span>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <p class="tools-block-title">Tools & Technologies</p>
-        <div class="tools-list">
-          <div class="tool-item">Microsoft Excel</div>
-          <div class="tool-item">Power BI</div>
-          <div class="tool-item">Python</div>
-          <div class="tool-item">Scikit-learn</div>
-          <div class="tool-item">Data Analysis</div>
-          <div class="tool-item">Financial Modelling</div>
-        </div>
-      </div>
-
+    <div class="research-item reveal">
+      <div class="research-num">R-02</div>
+      <div class="research-topic">Alternatives to Derivatives in Islamic Finance</div>
+    </div>
+    <div class="research-item reveal">
+      <div class="research-num">R-03</div>
+      <div class="research-topic">Monetary Policy Tools and Economic Impact</div>
+    </div>
+    <div class="research-item reveal">
+      <div class="research-num">R-04</div>
+      <div class="research-topic">Corporate Leasing under IFRS 16</div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-inner">
-    <p class="section-label">Let's Connect</p>
-    <h2 class="section-title">Get in Touch</h2>
-    <div class="divider"></div>
-    <div class="contact-grid">
-      <div class="contact-intro">
-        <p>I'm open to entry-level finance roles, internships, and collaborative opportunities. Whether in banking, investment, or FinTech — I'd love to hear from you.</p>
-        <br>
-        <p>Based in Nouakchott, Mauritania. Available for remote and on-site positions.</p>
-      </div>
-      <div class="contact-links">
-        <a href="tel:+22227779354" class="contact-link">
-          <span class="icon">📞</span>
-          <div>
-            <span class="lbl">Phone</span>
-            +222 27 779 354
-          </div>
-        </a>
-        <a href="mailto:22001@nbs.mr" class="contact-link">
-          <span class="icon">✉️</span>
-          <div>
-            <span class="lbl">Email</span>
-            22001@nbs.mr
-          </div>
-        </a>
-        <a href="https://www.linkedin.com" target="_blank" class="contact-link">
-          <span class="icon">🔗</span>
-          <div>
-            <span class="lbl">LinkedIn</span>
-            Connect with me
-          </div>
-        </a>
-        <a href="#" class="contact-link">
-          <span class="icon">📍</span>
-          <div>
-            <span class="lbl">Location</span>
-            Nouakchott, Mauritania
-          </div>
-        </a>
-      </div>
-    </div>
+  <div class="section-eyebrow">07 — Contact</div>
+  <h2 class="section-title">Let's Connect</h2>
+  <p class="contact-sub">Open to internships, entry-level roles, and conversations about finance, credit risk, and data.</p>
+  <div class="contact-links">
+    <a href="mailto:22001@nbs.mr" class="contact-item">✉ 22001@nbs.mr</a>
+    <a href="tel:+22227779354" class="contact-item">📞 +222 27779354</a>
+    <a href="https://linkedin.com" target="_blank" class="contact-item">in LinkedIn</a>
   </div>
+  <a href="mailto:22001@nbs.mr" class="btn btn-gold">Send a Message</a>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 Ahmedou Mohamedou Limam Ahmed &nbsp;·&nbsp; Nouakchott, Mauritania
+  <p>© 2026 Ahmedou Mohamedou Limam Ahmed &nbsp;·&nbsp; Nouakchott, Mauritania &nbsp;·&nbsp; Built with intent.</p>
 </footer>
 
 <script>
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
 
-const revealEls = document.querySelectorAll('.tl-item, .skill-card, .proj-card, .edu-item, .lang-card');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.top = window.scrollY > 50 ? '0' : '33px';
   });
-}, { threshold: 0.12 });
-
-revealEls.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
